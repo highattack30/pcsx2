@@ -181,9 +181,7 @@ void GSWndWGL::Detach()
 
 void GSWndWGL::OpenWGLDisplay()
 {
-	GLuint	  PixelFormat;			// Holds The Results After Searching For A Match
 	PIXELFORMATDESCRIPTOR pfd =			 // pfd Tells Windows How We Want Things To Be
-
 	{
 		sizeof(PIXELFORMATDESCRIPTOR),			  // Size Of This Pixel Format Descriptor
 		1,										  // Version Number
@@ -197,8 +195,8 @@ void GSWndWGL::OpenWGLDisplay()
 		0,										  // Shift Bit Ignored
 		0,										  // No Accumulation Buffer
 		0, 0, 0, 0,								 // Accumulation Bits Ignored
-		24,										 // 24Bit Z-Buffer (Depth Buffer)
-		8,										  // 8bit Stencil Buffer
+		0,										 // 24Bit Z-Buffer (Depth Buffer)
+		0,										  // 8bit Stencil Buffer
 		0,										  // No Auxiliary Buffer
 		PFD_MAIN_PLANE,							 // Main Drawing Layer
 		0,										  // Reserved
@@ -209,7 +207,7 @@ void GSWndWGL::OpenWGLDisplay()
 	if (!m_NativeDisplay)
 		win_error("(1) Can't Create A GL Device Context.");
 
-	PixelFormat = ChoosePixelFormat(m_NativeDisplay, &pfd);
+	GLuint PixelFormat = ChoosePixelFormat(m_NativeDisplay, &pfd);
 	if (!PixelFormat)
 		win_error("(2) Can't Find A Suitable PixelFormat.");
 
